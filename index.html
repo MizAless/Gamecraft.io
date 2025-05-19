@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GAMECRAFT - Геймификация для бизнеса</title>
+    <!-- <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const markers = [
+                document.getElementById("marker1"),
+                document.getElementById("marker2"),
+                document.getElementById("marker3"),
+                document.getElementById("marker4"),
+                document.getElementById("marker5")
+            ];
+            
+            const stages = document.querySelectorAll(".stage-item");
+        
+            const markerPositions = [
+                {top: 100, left: 50},
+                {top: 200, left: 100},
+                {top: 300, left: 150},
+                {top: 400, left: 200},
+                {top: 500, left: 250}
+            ];
+        
+            markers.forEach((marker, index) => {
+                const pos = markerPositions[index];
+                marker.style.top = pos.top + "px";
+                marker.style.left = pos.left + "px";
+            });
+        
+            markers.forEach((marker, index) => {
+                const stage = stages[index];
+                const line = document.createElement("div");
+                line.className = "line";
+                document.querySelector(".stages-content").appendChild(line);
+        
+                const markerRect = marker.getBoundingClientRect();
+                const stageRect = stage.getBoundingClientRect();
+        
+                const startX = markerRect.left + markerRect.width / 2;
+                const startY = markerRect.top + markerRect.height / 2;
+                const endX = stageRect.left;
+                const endY = stageRect.top + stageRect.height / 2;
+        
+                const length = Math.hypot(endX - startX, endY - startY);
+                const angle = Math.atan2(endY - startY, endX - startX) * 180 / Math.PI;
+        
+                line.style.width = length + "px";
+                line.style.top = startY + "px";
+                line.style.left = startX + "px";
+                line.style.transform = `rotate(${angle}deg)`;
+            });
+        });
+    </script> -->
+    <style>
+        /* Стили CSS */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0c1c4c;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 120px 20px 100px;
+            background-color: #0c1c4c;
+        }
+        nav img {
+            height: 60px;
+        }
+        nav a {
+            text-decoration: none;
+            color: #ffffff;
+            margin: 0 15px;
+            font-size: 18px;
+        }
+        .main-section {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            padding: 50px 10%;
+            background: linear-gradient(to bottom, #0c1c4c, #000);
+            color: #fff;
+            text-align: left;
+        }
+        .company{
+            margin-top: 100px;
+        }
+        .main-section h1 {
+            font-size: 3em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .main-section p {
+            font-size: 1.5em;
+            margin: 20px 0;
+        }
+        .main-section button {
+            background-color: #ffa500;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .main-section img {
+            max-width: 50%;
+            height: auto;
+        }
+
+        .about-section {
+            /* background-color: #000; */
+            background: linear-gradient(to bottom, #000, #0c1c4c);
+            color: #fff;
+            padding: 50px 20px 80px;
+            text-align: center;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .about-content img {
+            max-width: 40%;
+            height: auto;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            width: 55%;
+        }
+
+        .stat-item {
+            background-color: #1c1c1c;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 2.5em;
+            margin: 0;
+            color: #ffa500;
+        }
+
+        .stat-item p {
+            font-size: 1.2em;
+            margin: 5px 0 0;
+        }
+
+        .cases-section {
+            background: linear-gradient(to bottom, #0c1c4c, #000);
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .case {
+            display: flex;
+            align-items: center;
+            background-color: #e1d5d2;
+            padding: 20px;
+            margin: 20px auto;
+            border-radius: 10px; /* Округление углов */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Тень */
+            max-width: 800px;
+            text-align: left;
+            border: 4px solid #d4a54e; /* Цвет рамки и толщина */
+        }
+
+        .case.left {
+            flex-direction: row;
+        }
+
+        .case.right {
+            flex-direction: row-reverse;
+        }
+
+        .case img {
+            width: 150px;
+            height: auto;
+            border-radius: 10px;
+            margin-right: 20px;
+        }
+
+        .case.right img {
+            margin-right: 0;
+            margin-left: 20px;
+        }
+
+        .case-content {
+            flex: 1;
+        }
+
+        .case h3 {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .case p {
+            font-size: 1.2em;
+            color: #666;
+        }
+
+        .stages-section {
+            text-align: center;
+            padding: 50px 20px;
+            background-color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .stages-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 40px;
+        }
+
+        .stages-content img {
+            max-width: 65%;
+            height: auto;
+        }
+
+        .stages-list {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 20px;
+            width: 35%;
+        }
+
+        .stage-item {
+            background-color: #0c1c4c;
+            color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+
+        .stage-item h3 {
+            margin-top: 0;
+        }
+
+        .stages-content {
+            position: relative;
+        }
+
+        .marker {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            border-radius: 50%;
+        }
+
+        .line {
+            position: absolute;
+            width: 2px;
+            background-color: #ffa500;
+            transform-origin: top left;
+        }
+
+
+
+
+
+        .example-section, .contact-section {
+            padding: 50px 20px;
+            background-color: #fff;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <img src="images/coins-bag.svg" alt="Gamecraft Logo">
+        <div>
+            <a href="#about">О нас</a>
+            <a href="#cases">Кейсы</a>
+            <a href="#stages">Этапы работы</a>
+            <a href="#example">Пример игры</a>
+            <a href="#contact">Контакты</a>
+        </div>
+    </nav>
+    <div id="main" class="main-section">
+        <div class="company">
+            <h1>GAMECRAFT</h1>
+            <p>Знаем, как добывать реальные монеты с помощью геймификации</p>
+            <button>Бесплатная консультация</button>
+        </div>
+        <img src="images/big-coin-bag.svg" alt="Big Coin Bag">
+    </div>
+    <div id="about" class="about-section">
+        <!-- <h2>О нас</h2> -->
+        <div class="about-content">
+            <img src="images/about-us.svg" alt="Image">
+            <div class="stats-container">
+                <div class="stat-item">
+                    <h3>> 70%</h3>
+                    <p>клиентов возвращаются повторно</p>
+                </div>
+                <div class="stat-item">
+                    <h3>на 35%</h3>
+                    <p>увеличение времени взаимодействия с брендом</p>
+                </div>
+                <div class="stat-item">
+                    <h3>на 40%</h3>
+                    <p>рост производительности сотрудников после геймификации обучения</p>
+                </div>
+                <div class="stat-item">
+                    <h3>50%</h3>
+                    <p>повышение мотивации и удовлетворенности персонала</p>
+                </div>
+                <div class="stat-item">
+                    <h3>> 30%</h3>
+                    <p>повышение лояльности аудитории бренда</p>
+                </div>
+                <div class="stat-item">
+                    <h3>+30%</h3>
+                    <p>рост выручки в первый год после внедрения</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="cases" class="cases-section">
+        <div class="case left">
+            <img src="images/NDA-img.png" alt="Кейс 1" class="case-image">
+            <div class="case-content">
+                <h3>Кейс 1: Улучшение вовлеченности сотрудников</h3>
+                <p>Проект направлен на повышение производительности и мотивации команды в крупной IT-компании. Используемые методы геймификации привели к увеличению вовлеченности на 25%.</p>
+            </div>
+        </div>
+        <div class="case right">
+            <img src="images/NDA-img.png" alt="Кейс 2" class="case-image">
+            <div class="case-content">
+                <h3>Кейс 2: Увеличение продаж</h3>
+                <p>Разработка системы наград для стимулирования покупок в онлайн-ритейле. Результатом стало повышение конверсии на 15% в течение первых трех месяцев.</p>
+            </div>
+            
+        </div>
+        <div class="case left">
+            <img src="images/NDA-img.png" alt="Кейс 3" class="case-image">
+            <div class="case-content">
+                <h3>Кейс 3: Лояльность клиентов</h3>
+                <p>Внедрение программы лояльности с элементами игры в сфере финансовых услуг. Проект увеличил количество повторных обращений клиентов на 30%.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div id="stages" class="stages-section">
+        <h2>Этапы работы</h2>
+        <div class="stages-content">
+            <div id="marker1" class="marker"></div>
+            <div id="marker2" class="marker"></div>
+            <div id="marker3" class="marker"></div>
+            <div id="marker4" class="marker"></div>
+            <div id="marker5" class="marker"></div>
+            <img src="images/stages.svg" alt="Этапы работы">
+            <div class="stages-list">
+                <div class="stage-item" data-step="1">
+                    <h3>Бриф</h3>
+                    <p>Описание этапа Бриф.</p>
+                </div>
+                <div class="stage-item" data-step="2">
+                    <h3>Обсуждение</h3>
+                    <p>Описание этапа Обсуждение.</p>
+                </div>
+                <div class="stage-item" data-step="3">
+                    <h3>Разработка</h3>
+                    <p>Описание этапа Разработка.</p>
+                </div>
+                <div class="stage-item" data-step="4">
+                    <h3>Тестирование</h3>
+                    <p>Описание этапа Тестирование.</p>
+                </div>
+                <div class="stage-item" data-step="5">
+                    <h3>Внедрение</h3>
+                    <p>Описание этапа Внедрение.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div id="example" class="example-section">
+        <h2>Пример игры</h2>
+        <p>Конкретный пример геймифицированной игры, разработанной нами...</p>
+    </div>
+    <div id="contact" class="contact-section">
+        <h2>Контакты</h2>
+        <p>Как связаться с нами для консультаций и сотрудничества...</p>
+    </div>
+    <footer>
+        <p>&copy; 2024 GAMECRAFT. Все права защищены.</p>
+    </footer>
+</body>
+</html>
