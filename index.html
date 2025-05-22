@@ -6,6 +6,10 @@
     <title>GAMECRAFT - Геймификация для бизнеса</title>
     <style>
         /* Стили CSS */
+        /* *, *::before, *::after {
+            box-sizing: border-box;
+        } */
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -226,9 +230,91 @@
             color: white;
         }
 
-        .contact-button:hover {
+        .consultation-button {
+            background-color: #ffa500;
+            color: #000;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 20px auto;
+            display: block;
+        }
+
+        .contact-button:hover, .consultation-button:hover {
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        /* Стили для формы */
+        .consultation-form {
+            display: none;
+            max-width: 500px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #1c1c1c;
+            border-radius: 10px;
+            text-align: left;
+        }
+
+        .consultation-form h3 {
+            color: #ffa500;
+            text-align: center;
+            margin-top: 0;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .consultation-form input, 
+        .consultation-form textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #444;
+            background-color: #333;
+            color: #fff;
+            box-sizing: border-box; /* Добавь эту строку */
+        }
+
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .form-group input:focus, 
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #ffa500;
+        }
+
+        .required-field::after {
+            content: " *";
+            color: red;
+        }
+
+        .submit-btn {
+            background-color: #ffa500;
+            color: #000;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+            font-weight: bold;
+        }
+
+        .submit-btn:hover {
+            background-color: #e69500;
         }
 
         footer {
@@ -334,6 +420,10 @@
                 justify-content: center;
                 gap: 20px;
             }
+            .consultation-button {
+                display: inline-block;
+                margin: 20px 10px;
+            }
         }
     </style>
 </head>
@@ -350,7 +440,6 @@
         <div class="company">
             <h1>GAMECRAFT</h1>
             <p>Знаем, как добывать реальные монеты с помощью геймификации</p>
-            <button>Бесплатная консультация</button>
         </div>
         <img src="images/big-coin-bag.svg" alt="Big Coin Bag">
     </div>
@@ -358,10 +447,10 @@
         <div class="about-content">
             <img src="images/about-us.svg" alt="Image">
             <div class="stats-container">
-                <div class="stat-item">
+                <!-- <div class="stat-item">
                     <h3>> 70%</h3>
                     <p>клиентов возвращаются повторно</p>
-                </div>
+                </div> -->
                 <div class="stat-item">
                     <h3>на 35%</h3>
                     <p>увеличение времени взаимодействия с брендом</p>
@@ -405,11 +494,38 @@
     <div id="contact" class="contact-section">
         <div class="contact-content">
             <h2>Готовы увеличить прибыль с помощью игровых механик?</h2>
-            <p>Наши решения по геймификации уже помогли десяткам компаний повысить вовлеченность клиентов и сотрудников на 30-70%. Оставьте заявку сейчас и получите бесплатный аудит вашего бизнеса с готовыми идеями по внедрению игровых механик!</p>
+            <p>Оставьте заявку сейчас и получите бесплатный аудит вашего бизнеса с готовыми идеями по внедрению игровых механик!</p>
             
-            <div class="contact-phone">
-                +7 (999) 123-45-67
-            </div>
+            <button class="consultation-button" onclick="showConsultationForm()">Бесплатная консультация</button>
+            
+            <form class="consultation-form" id="consultationRequest" 
+                action="https://formspree.io/f/gamecraft.corporation@gmail.com" 
+                method="POST">
+                <h3>Заявка на консультацию</h3>
+                <!-- Поля формы остаются без изменений -->
+                <div class="form-group">
+                    <label for="fullname" class="required-field">ФИО</label>
+                    <input type="text" id="fullname" name="fullname" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone" class="required-field">Телефон</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="required-field">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="comment">Комментарий</label>
+                    <textarea id="comment" name="comment"></textarea>
+                </div>
+                
+                <!-- Скрытые поля для настройки -->
+                <input type="hidden" name="_subject" value="Новая заявка с GAMECRAFT">
+                <input type="hidden" name="_language" value="ru">
+                
+                <button type="submit" class="submit-btn">Отправить заявку</button>
+            </form>
             
             <p>Или напишите нам в мессенджеры:</p>
             
@@ -422,5 +538,77 @@
     <footer>
         <p>&copy; 2024 GAMECRAFT. Все права защищены.</p>
     </footer>
+
+    <script>
+        function showConsultationForm() {
+            const form = document.getElementById('consultationRequest');
+            if (form.style.display === 'block') {
+                form.style.display = 'none';
+            } else {
+                form.style.display = 'block';
+                // Плавная прокрутка к форме
+                form.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
+        // function submitForm(event) {
+        //     event.preventDefault();
+            
+        //     // Здесь можно добавить AJAX-запрос для отправки формы
+        //     // или просто показать сообщение об успешной отправке
+            
+        //     alert('Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.');
+        //     document.getElementById('consultationRequest').reset();
+        //     document.getElementById('consultationForm').style.display = 'none';
+        // }
+
+        document.getElementById('consultationRequest').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const form = e.target;
+            const submitBtn = form.querySelector('button[type="submit"]');
+            
+            // Блокируем кнопку при отправке
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Отправка...';
+            
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: { 'Accept': 'application/json' }
+                });
+                
+                if (response.ok) {
+                    alert('✅ Заявка отправлена! Мы свяжемся с вами в ближайшее время.');
+                    form.reset();
+                    document.getElementById('consultationForm').style.display = 'none';
+                    
+                    // Редирект (опционально)
+                    // window.location.href = "/thank-you.html";
+                } else {
+                    throw new Error('Ошибка сервера');
+                }
+            } catch (error) {
+                alert('❌ Ошибка отправки. Пожалуйста, попробуйте еще раз или свяжитесь с нами через WhatsApp/Telegram.');
+                console.error(error);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Отправить заявку';
+            }
+        });
+
+        // Закрытие формы при клике вне ее области
+        document.addEventListener('click', function(event) {
+            const form = document.getElementById('consultationForm');
+            const button = document.querySelector('.consultation-button');
+            
+            if (form.style.display === 'block' && 
+                !form.contains(event.target) && 
+                event.target !== button && 
+                !button.contains(event.target)) {
+                form.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
