@@ -581,7 +581,7 @@
                 if (response.ok) {
                     alert('✅ Заявка отправлена! Мы свяжемся с вами в ближайшее время.');
                     form.reset();
-                    document.getElementById('consultationForm').style.display = 'none';
+                    document.getElementById('consultationRequest').style.display = 'none';
                     
                     // Редирект (опционально)
                     // window.location.href = "/thank-you.html";
@@ -599,7 +599,7 @@
 
         // Закрытие формы при клике вне ее области
         document.addEventListener('click', function(event) {
-            const form = document.getElementById('consultationForm');
+            const form = document.getElementById('consultationRequest');
             const button = document.querySelector('.consultation-button');
             
             if (form.style.display === 'block' && 
