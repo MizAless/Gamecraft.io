@@ -69,14 +69,15 @@
             margin: 15px 0;
         }
         .main-section button {
+            text-align: left;
             background-color: #ffa500;
             color: #000;
             border: none;
             padding: 12px 25px;
             font-size: 1em;
             cursor: pointer;
-            margin-top: 20px;
-            border-radius: 5px;
+            margin-top: 50px;
+            border-radius: 25px;
         }
         .main-section img {
             max-width: 100%;
@@ -471,6 +472,7 @@
         <div class="company">
             <h1>GAMECRAFT</h1>
             <p>Знаем, как добывать реальные монеты с помощью геймификации</p>
+            <button class="consultation-button" onclick="showConsultationForm()">Бесплатная консультация</button>
         </div>
         <img src="images/big-coin-bag.svg" alt="Big Coin Bag">
     </div>
@@ -634,12 +636,18 @@
         // Закрытие формы при клике вне ее области
         document.addEventListener('click', function(event) {
             const form = document.getElementById('consultationRequest');
-            const button = document.querySelector('.consultation-button');
+            const buttons = document.querySelectorAll('.consultation-button');
+            let isButton = false;
+            
+            buttons.forEach(button => {
+                if (event.target === button || button.contains(event.target)) {
+                    isButton = true;
+                }
+            });
             
             if (form.style.display === 'block' && 
                 !form.contains(event.target) && 
-                event.target !== button && 
-                !button.contains(event.target)) {
+                !isButton) {
                 form.style.display = 'none';
             }
         });
